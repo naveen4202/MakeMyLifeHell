@@ -1,0 +1,98 @@
+<html>
+<head>
+  <title>Kill me.</title>
+  <style>
+  * {
+    font-family: "Georgia", serif;
+  }
+  #title
+  {
+    font-size: 64px;
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  #desc
+  {
+    font-size: 16px;
+    margin-bottom: 48px;
+  }
+  #messages
+  {
+    resize: none;
+    width: 50%;
+    height: 25em;
+    font-size: 16px;
+    line-height: 200%;
+    padding-top: 16px;
+    padding-left: 24px;
+  }
+  #text
+  {
+    resize: none;
+    width: 55%;
+    height: 4em;
+    font-size: 24px;
+  }
+  #button
+  {
+    padding: 6px 16px;
+    font-size: 32px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color:chocolate;
+    text-shadow: -1px 1px black;
+  }
+  </style>
+</head>
+
+<body bgcolor="lightgray">
+  <div align="center">
+    <p id="title">I HATE MYSELF</p>
+    <p id="desc">its a simple node app and python based website which makes my life hell :)</p>
+    <textarea id="messages" readonly="1" hidden></textarea>
+    <h3 id="numClients" hidden>Clients connected: 0</h1>
+    <textarea id="text" placeholder="type your shit here dumb ass" autofocus="1"></textarea>
+    <br>
+    <button id="button" onclick="btnOnclick()">Fuck you bitch</button>
+  </div>
+</body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+  function onNumClients(msg)
+  {
+    document.getElementById('numClients').innerHTML = 'Clients connected: ' + msg;
+  }
+
+  function onMessages(msgs)
+  {
+    let acc = '';
+    for(msg of msgs) {
+      acc += msg + '\n';
+    }
+    acc.trimRight();
+    document.getElementById('messages').value = acc;
+  }
+
+  function onSynth(msg)
+  {
+    document.getElementById('messages').value += msg + '\n';
+  }
+
+  var socket = io();
+
+  socket.on('numClients', onNumClients);
+
+  socket.on('messages', onMessages);
+
+  socket.on('synth', onSynth);
+
+  function btnOnclick()
+  {
+    socket.emit('send_synth', document.getElementById('text').value);
+  }
+
+</script>
+</html>
