@@ -1,1 +1,1 @@
-web: node lameprogram
+web: node ./whydididothis.js
