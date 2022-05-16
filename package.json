@@ -6,6 +6,5 @@
     "express": "^4.17.1",
     "socket.io": "^4.0.0",
     "stack": "^0.1.0"
-    [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/naveen4202/MakeMyLifeHell)
   }
 }
